@@ -78,16 +78,14 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 
 			User user = null;
-			if (rs.next()) {
+			while (rs.next()) {
 				user = new User(
 						rs.getString("userId"), 
 						rs.getString("password"), 
 						rs.getString("name"),
 						rs.getString("email"));
-				System.out.println("user in db: " + user);
 				users.add(user);
 			}
-			System.out.println("all: " + users.toString());
 			return users;
 		} finally {
 			if (rs != null) {
