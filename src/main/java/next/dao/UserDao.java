@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 import core.jdbc.ConnectionManager;
 import next.model.User;
 
-public class UserDao {
+public class UserDao {	
 	public void insert(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
