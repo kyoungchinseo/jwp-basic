@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 import core.jdbc.ConnectionManager;
 import next.model.User;
@@ -72,6 +69,7 @@ public class UserDao {
 		ResultSet rs = null;
 		
 		List<User> users = new ArrayList<User>();
+		users.clear();
 		
 		try {
 			con = ConnectionManager.getConnection();
@@ -86,8 +84,7 @@ public class UserDao {
 						rs.getString("password"), 
 						rs.getString("name"),
 						rs.getString("email"));
-				
-				
+				System.out.println("user in db: " + user);
 				users.add(user);
 			}
 			System.out.println("all: " + users.toString());
