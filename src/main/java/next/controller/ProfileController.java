@@ -11,7 +11,7 @@ import next.model.User;
 public class ProfileController implements Controller {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String userId = req.getParameter("userId");        
+		String userId = req.getParameter("userId");  
 		User user = new UserDao().findByUserId(userId);
         
         if (user == null) {

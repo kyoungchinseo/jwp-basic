@@ -13,8 +13,10 @@ public class ListUserController implements Controller {
 		if (!UserSessionUtils.isLogined(req.getSession())) {
 			return "redirect:/users/loginForm";
 		}
+		UserDao userDao = new UserDao();
+		req.setAttribute("users", userDao.findAll());
 		
-		req.setAttribute("users", new UserDao().findAll());
+		//req.setAttribute("users", new UserDao().findAll());
 		
 		return "/user/list.jsp";
 	}
