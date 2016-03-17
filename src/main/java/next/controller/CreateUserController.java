@@ -23,8 +23,6 @@ public class CreateUserController implements Controller {
 				req.getParameter("email"));
 		log.debug("User : {}", user);
 		
-		//DataBase.addUser(user);
-		
 		UserDao userDao = new UserDao();
 		userDao.insert(user);
 		

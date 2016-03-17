@@ -14,7 +14,8 @@ public class LoginController implements Controller {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String userId = req.getParameter("userId");
         String password = req.getParameter("password");
-        User user = new UserDao().findByUserId(userId);
+        UserDao userDao = new UserDao();
+        User user = userDao.findByUserId(userId);
         if (user == null) {
            req.setAttribute("loginFailed", true);
            return "/user/login.jsp";
