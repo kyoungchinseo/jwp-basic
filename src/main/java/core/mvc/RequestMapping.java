@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import next.controller.CreateUserController;
 import next.controller.HomeController;
 import next.controller.ListUserController;
@@ -20,7 +21,7 @@ import next.controller.UpdateUserController;
 
 public class RequestMapping {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-	private Map<String, Controller> mappings = new HashMap<>();
+	private Map<String, Controller> mappings = new HashMap<String, Controller>();
 	
 	void initMapping() {
 		mappings.put("/", new HomeController());
@@ -33,9 +34,9 @@ public class RequestMapping {
 	    mappings.put("/users/create", new CreateUserController());
 	    mappings.put("/users/updateForm", new UpdateFormUserController());
 	    mappings.put("/users/update", new UpdateUserController());
-	    mappings.put("/qna/form", new QnaFormController());
-	    mappings.put("/qna/update", new UpdateQuestionController());
-	    mappings.put("/qna/show", new ShowQnAController());
+	    //mappings.put("/qna/form", new QnaFormController());
+	    //mappings.put("/qna/update", new UpdateQuestionController());
+	    //mappings.put("/qna/show", new ShowQnAController());
 
 		logger.info("Initialized Request Mapping!");
 	}
