@@ -3,20 +3,20 @@ package next.model;
 import java.sql.Timestamp;
 
 public class Question {
-	private	long questionId;
+	private long questionId;
 	private String writer;
 	private String title;
 	private String contents;
-	private Timestamp createDate;
+	private Timestamp createdDate;
 	private int countOfAnswer;
 	
-	public Question(long questionId, String writer, String title, String contents, Timestamp createDate,
+	public Question(long questionId, String writer, String title, String contents, Timestamp createdDate,
 			int countOfAnswer) {
 		this.questionId = questionId;
 		this.writer = writer;
 		this.title = title;
 		this.contents = contents;
-		this.createDate = createDate;
+		this.createdDate = createdDate;
 		this.countOfAnswer = countOfAnswer;
 	}
 
@@ -36,8 +36,8 @@ public class Question {
 		return contents;
 	}
 
-	public Timestamp getCreateDate() {
-		return createDate;
+	public Timestamp getCreatedDate() {
+		return createdDate;
 	}
 
 	public int getCountOfAnswer() {
@@ -50,7 +50,7 @@ public class Question {
 		int result = 1;
 		result = prime * result + ((contents == null) ? 0 : contents.hashCode());
 		result = prime * result + countOfAnswer;
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + (int) (questionId ^ (questionId >>> 32));
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((writer == null) ? 0 : writer.hashCode());
@@ -73,10 +73,10 @@ public class Question {
 			return false;
 		if (countOfAnswer != other.countOfAnswer)
 			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
+		if (createdDate == null) {
+			if (other.createdDate != null)
 				return false;
-		} else if (!createDate.equals(other.createDate))
+		} else if (!createdDate.equals(other.createdDate))
 			return false;
 		if (questionId != other.questionId)
 			return false;
@@ -96,8 +96,10 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [questionId=" + questionId + ", writer=" + writer + ", title=" + title + ", contents="
-				+ contents + ", createDate=" + createDate + ", countOfAnswer=" + countOfAnswer + "]";
+				+ contents + ", createdDate=" + createdDate + ", countOfAnswer=" + countOfAnswer + "]";
 	}
 
-		
+	
+	
+	
 }

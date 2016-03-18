@@ -6,15 +6,15 @@ public class Answer {
 	private long answerId;
 	private String writer;
 	private String contents;
-	private Timestamp createDate;
+	private Timestamp createdDate;
 	private long questionId;
 	
 	public Answer(long answerId, String writer, String contents,
-			Timestamp createDate, long questionId) {
+			Timestamp createdDate, long questionId) {
 		this.answerId = answerId;
 		this.writer = writer;
 		this.contents = contents;
-		this.createDate = createDate;
+		this.createdDate = createdDate;
 		this.questionId = questionId;
 	}
 
@@ -30,8 +30,8 @@ public class Answer {
 		return contents;
 	}
 
-	public Timestamp getCreateDate() {
-		return createDate;
+	public Timestamp getCreatedDate() {
+		return createdDate;
 	}
 
 	public long getQuestionId() {
@@ -44,7 +44,7 @@ public class Answer {
 		int result = 1;
 		result = prime * result + (int) (answerId ^ (answerId >>> 32));
 		result = prime * result + ((contents == null) ? 0 : contents.hashCode());
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + (int) (questionId ^ (questionId >>> 32));
 		result = prime * result + ((writer == null) ? 0 : writer.hashCode());
 		return result;
@@ -66,10 +66,10 @@ public class Answer {
 				return false;
 		} else if (!contents.equals(other.contents))
 			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
+		if (createdDate == null) {
+			if (other.createdDate != null)
 				return false;
-		} else if (!createDate.equals(other.createDate))
+		} else if (!createdDate.equals(other.createdDate))
 			return false;
 		if (questionId != other.questionId)
 			return false;
@@ -83,8 +83,8 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", writer=" + writer + ", contents=" + contents + ", createDate="
-				+ createDate + ", questionId=" + questionId + "]";
+		return "Answer [answerId=" + answerId + ", writer=" + writer + ", contents=" + contents + ", createdDate="
+				+ createdDate + ", questionId=" + questionId + "]";
 	}
 	
 	

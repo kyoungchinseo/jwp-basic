@@ -15,7 +15,7 @@ public class UserDao {
         jdbcTemplate.update(sql, user.getUserId(),
                 user.getPassword(),
                 user.getName(),
-                user.getEmail());
+                user.getEmail()); 
     }
 
     public User findByUserId(String userId) {
