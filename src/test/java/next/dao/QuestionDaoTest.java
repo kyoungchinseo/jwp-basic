@@ -18,9 +18,9 @@ public class QuestionDaoTest {
 
 	@Before
 	public void setUp() {
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("jwp.sql"));
-		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
+//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//		populator.addScript(new ClassPathResource("jwp.sql"));
+//		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
 	}
 
 	@Test
