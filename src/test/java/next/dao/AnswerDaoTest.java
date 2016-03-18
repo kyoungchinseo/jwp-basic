@@ -18,12 +18,12 @@ public class AnswerDaoTest {
         DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
     }
     
-    @Test
-    public void addAnswer() throws Exception {
-        long questionId = 1L;
-        Answer expected = new Answer("javajigi", "answer contents", questionId);
-        AnswerDao dut = new AnswerDao();
-        Answer answer = dut.insert(expected);
-        System.out.println("Answer : " + answer);
-    }
+//    @Test
+//    public void addAnswer() throws Exception {
+//        long questionId = 1L;
+//        Answer expected = new Answer("javajigi", "answer contents", questionId);
+//        AnswerDao dut = new AnswerDao();
+//        Answer answer = dut.insert(expected);
+//        System.out.println("Answer : " + answer);
+//    }
 }
