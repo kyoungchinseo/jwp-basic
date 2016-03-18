@@ -16,9 +16,9 @@ import next.model.User;
 public class UserDaoTest {
 	@Before
 	public void setup() {
-//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-//		populator.addScript(new ClassPathResource("jwp.sql"));
-//		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("jwp.sql"));
+		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
 	}
 
 	@Test
