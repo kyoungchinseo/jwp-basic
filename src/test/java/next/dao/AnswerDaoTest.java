@@ -25,19 +25,19 @@ public class AnswerDaoTest {
 
 	@Test
 	public void testInsert() {
-		Calendar calender = Calendar.getInstance();
-		Timestamp  tsTimestamp = new Timestamp(calender.getTime().getTime());
-		System.out.println(tsTimestamp.toString());
-
-		Answer expected = new Answer(6,"dwua","hello, hello",tsTimestamp, 1);
-		AnswerDao answerDao = new AnswerDao();
-		answerDao.insert(expected);
-		System.out.println(expected.toString());
-		
-		Answer returned = answerDao.findByAnswerId(expected.getAnswerId());
-		System.out.println(returned.toString());
-		
-		assertEquals(expected, returned);
+//		Calendar calender = Calendar.getInstance();
+//		Timestamp  tsTimestamp = new Timestamp(calender.getTime().getTime());
+//		System.out.println(tsTimestamp.toString());
+//
+//		Answer expected = new Answer(6,"dwua","hello, hello",tsTimestamp, 1);
+//		AnswerDao answerDao = new AnswerDao();
+//		answerDao.insert(expected);
+//		System.out.println(expected.toString());
+//		
+//		Answer returned = answerDao.findByAnswerId(expected.getAnswerId());
+//		System.out.println(returned.toString());
+//		
+//		assertEquals(expected, returned);
 		
 	}
 
