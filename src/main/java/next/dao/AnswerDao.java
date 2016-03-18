@@ -13,8 +13,8 @@ import next.model.Answer;
 public class AnswerDao {
 	public void insert(Answer answer) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "INSERT INTO ANSWERS VALUES (?,?,?,?,?)";
-		jdbcTemplate.update(sql, answer.getAnswerId(),
+		String sql = "INSERT INTO ANSWERS(writer,contents,createdDate,questionId) VALUES (?,?,?,?)";
+		jdbcTemplate.update(sql,
 				answer.getWriter(),
 				answer.getContents(),
 				answer.getCreatedDate(),
@@ -58,7 +58,19 @@ public class AnswerDao {
 	
 	public List<Answer> findAnswersByQuestionId(long questionId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return null;
+		String sql = "SELECT answerId, writer, contents, createdDate, questionId FROM ANSWERS where questionId=?";
+		RowMapper<Answer> rm = new RowMapper<Answer>() {
+            @Override
+            public Answer mapRow(ResultSet rs) throws SQLException {
+                return new Answer(rs.getLong("answerId"),
+                		rs.getString("writer"),
+                		rs.getString("contents"),
+                		rs.getTimestamp("createdDate"),
+                		rs.getLong("questionId")
+                	); 
+            }
+        };
+        return jdbcTemplate.query(sql, rm, questionId);
 	}
 	
 	public void update(Answer answer) {

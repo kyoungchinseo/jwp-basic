@@ -13,8 +13,8 @@ import next.model.Question;
 public class QuestionDao {
 	public void insert(Question question) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "INSERT INTO QUESTIONS VALUES (?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, question.getQuestionId(),
+		String sql = "INSERT INTO QUESTIONS(writer,title,contents,createdDate,countOfAnswer) VALUES (?,?,?,?,?)";
+		jdbcTemplate.update(sql, 
 				question.getWriter(),
 				question.getTitle(),
 				question.getContents(),
