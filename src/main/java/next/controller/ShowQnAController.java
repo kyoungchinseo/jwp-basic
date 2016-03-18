@@ -18,7 +18,6 @@ public class ShowQnAController implements Controller {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 				
 		String questionId = req.getParameter("questionId");
-		System.out.println(questionId);
 		
 		QuestionDao questionDao = new QuestionDao();
 		Question question = questionDao.fingByQuestionId(Long.parseLong(questionId));
