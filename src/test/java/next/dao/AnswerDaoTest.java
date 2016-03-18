@@ -29,11 +29,13 @@ public class AnswerDaoTest {
 		Timestamp  tsTimestamp = new Timestamp(calender.getTime().getTime());
 		System.out.println(tsTimestamp.toString());
 
-		Answer expected = new Answer(0,"dwua","hello, hello",tsTimestamp, 9);
+		Answer expected = new Answer(1,"dwua","hello, hello",tsTimestamp, 1);
 		AnswerDao answerDao = new AnswerDao();
 		answerDao.insert(expected);
+		System.out.println(expected.toString());
 		
 		Answer returned = answerDao.findByAnswerId(expected.getAnswerId());
+		System.out.println(returned.toString());
 		
 		assertEquals(expected, returned);
 		
