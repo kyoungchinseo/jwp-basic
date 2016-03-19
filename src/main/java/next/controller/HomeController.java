@@ -13,8 +13,8 @@ public class HomeController implements Controller {
 		UserDao userDao = new UserDao();
 		req.setAttribute("users", userDao.findAll());
 		
-		//QuestionDao questionDao = new QuestionDao();
-		//req.setAttribute("questions", questionDao.findAll());
+		QuestionDao questionDao = new QuestionDao();
+		req.setAttribute("questions", questionDao.findAll());
 		
 		return "index.jsp";
 	}
