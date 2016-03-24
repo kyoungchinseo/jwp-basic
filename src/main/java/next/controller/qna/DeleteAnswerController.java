@@ -18,27 +18,16 @@ public class DeleteAnswerController implements Controller {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		// TODO Auto-generated method stub
 
-		//String questionId = req.getParameter("questionId");
-		
-		//System.out.println(answer.toString());
 		String answerId = req.getParameter("answerId");
-		System.out.println(answerId);
-		
 		AnswerDao answerDao = new AnswerDao();
 		
 		answerDao.deleteById(Long.parseLong(answerId));
-		try {
+
 			
-			ObjectMapper mapper = new ObjectMapper();
-			resp.setContentType("application/json;charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.print(mapper.writeValueAsString(Result.ok().toString()));
-			
-			//out.print(mapper.writeValueAsString(answerDao.findAllByQuestionId(Long.parseLong(questionId))));
-		} catch(Exception e) {
-			System.out.println(e);
-			
-		}	
+		ObjectMapper mapper = new ObjectMapper();
+		resp.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.print(mapper.writeValueAsString(Result.ok()));
 
 		return null;
 	}
