@@ -8,7 +8,37 @@ String.prototype.format = function() {
   });
 };
 
-$(".answerWrite input[type=submit]").click(addAnswer);
+$(".form-delete button[type=submit]").on('click',deleteAnswer);
+
+function deleteAnswer(e) {
+	e.preventDefault();
+	console.log("delete button");
+	var dataString = $(this).parent().closest("form").serialize();
+	console.log(dataString);
+	$.ajax({
+		type:'post',
+		url: '/api/qna/deleteAnswer',
+		data: dataString,
+		dataType: 'json',
+		error: onErrorDelete,
+		success: onSuccessDelete,
+	});
+}
+
+function onErrorDelete(xhr, status) {
+	alert("delete error");
+}
+
+function onSuccessDelete(json, status) {
+	console.log(json);
+	console.log($(this).parent().closest("article"));
+	
+	
+	$(this).closest("article.article").remove();
+	//location.reload();
+}
+
+$(".answerWrite input[type=submit]").on("click", addAnswer);
 
 function addAnswer(e) {
 	e.preventDefault();
@@ -35,3 +65,6 @@ function onSuccess(json, status) {
 	$(".qna-comment-slipp-articles").prepend(template);
 	
 }
+
+
+
