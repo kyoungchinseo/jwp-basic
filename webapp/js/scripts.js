@@ -29,6 +29,7 @@ function deleteAnswer(e) {
 	    success: function (json, status) {
 	    	if (json.status) {
 	    		btnDelete.closest('article').remove();
+	    		$(".qna-comment-count strong").text($(".qna-comment").find(".article").length);
 	    	}
 	    }
 	});
@@ -53,6 +54,8 @@ function addAnswer(e) {
 			var answerTemplate = $("#answerTemplate").html();
 			var template = answerTemplate.format(json.writer, new Date(json.createdDate), json.contents, json.answerId, json.answerId);
 			$(".qna-comment-slipp-articles").prepend(template);
+			// x개의 의견 
+			$(".qna-comment-count strong").text($(".qna-comment").find(".article").length);
 		}
 	});
 }

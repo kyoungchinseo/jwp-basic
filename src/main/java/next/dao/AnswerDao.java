@@ -28,6 +28,11 @@ public class AnswerDao {
 				return pstmt;
 			}
 		};
+		
+		// add 
+		QuestionDao questionDao = new QuestionDao();
+		questionDao.increaseCountOfAnswer(answer.getQuestionId());
+		
         
 		KeyHolder keyHolder = new KeyHolder();
         jdbcTemplate.update(psc, keyHolder);
@@ -69,6 +74,11 @@ public class AnswerDao {
     	JdbcTemplate jdbcTemplate = new JdbcTemplate();
     	String sql = "delete from ANSWERS where answerId = ?";
 
+    	Answer answer = this.findById(answerId);
+    	
+    	QuestionDao questionDao = new QuestionDao();
+		questionDao.decreaseCountOfAnswer(answer.getQuestionId());
+    	
     	jdbcTemplate.update(sql, answerId);
     }
 }

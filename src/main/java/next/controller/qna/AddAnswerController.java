@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.mvc.Controller;
 import next.dao.AnswerDao;
 import next.model.Answer;
+import next.model.Result;
 
 public class AddAnswerController implements Controller {
 
@@ -23,18 +24,22 @@ public class AddAnswerController implements Controller {
 				req.getParameter("contents"),
 				Long.parseLong(req.getParameter("questionId")));
 		//System.out.println(answer.toString());
+		ObjectMapper mapper = new ObjectMapper();
+		resp.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		String response = null;
 		
 		AnswerDao answerDao = new AnswerDao();
 		try {
 			Answer savedAnswer = answerDao.insert(answer);
-			ObjectMapper mapper = new ObjectMapper();
-			resp.setContentType("application/json;charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.print(mapper.writeValueAsString(savedAnswer));
+			response = mapper.writeValueAsString(savedAnswer);
 		} catch(Exception e) {
 			System.out.println(e);
+			String message = e.toString();
+			response = mapper.writeValueAsString(Result.fail(message));
 		}	
 		
+		out.print(response);
 		
 		return null;  // <=======================
 	}

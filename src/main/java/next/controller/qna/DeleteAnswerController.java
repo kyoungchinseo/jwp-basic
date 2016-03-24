@@ -20,14 +20,23 @@ public class DeleteAnswerController implements Controller {
 
 		String answerId = req.getParameter("answerId");
 		AnswerDao answerDao = new AnswerDao();
+		System.out.println(answerId);
 		
-		answerDao.deleteById(Long.parseLong(answerId));
-
-			
 		ObjectMapper mapper = new ObjectMapper();
 		resp.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		out.print(mapper.writeValueAsString(Result.ok()));
+		String response = null;
+		try {
+			answerDao.deleteById(Long.parseLong(answerId));
+			response = mapper.writeValueAsString(Result.ok());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			String message = e.toString();
+			response = mapper.writeValueAsString(Result.fail(message));
+		}
+
+		out.print(response);
 
 		return null;
 	}
