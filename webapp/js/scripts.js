@@ -27,9 +27,9 @@ function deleteAnswer(e) {
 			alert("error");
 	    },
 	    success: function (json, status) {
-	    if (json.status) {
-	    	btnDelete.closest('article').remove();
-	      }
+	    	if (json.status) {
+	    		btnDelete.closest('article').remove();
+	    	}
 	    }
 	});
 }
