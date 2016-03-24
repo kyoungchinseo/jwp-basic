@@ -10,6 +10,8 @@ String.prototype.format = function() {
 
 $(".form-delete button[type=submit]").on('click',deleteAnswer);
 
+//$(".qna-comment").on("click", ".form-delete", deleteAnswer);
+
 function deleteAnswer(e) {
 	e.preventDefault();
 	console.log("delete button");
