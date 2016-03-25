@@ -20,12 +20,12 @@ public class DeleteAnswerController implements Controller {
 
 		String answerId = req.getParameter("answerId");
 		AnswerDao answerDao = new AnswerDao();
-		System.out.println(answerId);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		resp.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		String response = null;
+
 		try {
 			answerDao.deleteById(Long.parseLong(answerId));
 			response = mapper.writeValueAsString(Result.ok());
@@ -34,10 +34,13 @@ public class DeleteAnswerController implements Controller {
 			e.printStackTrace();
 			String message = e.toString();
 			response = mapper.writeValueAsString(Result.fail(message));
+		} 
+		
+		if (response != null) {
+			out.print(response);
+
 		}
-
-		out.print(response);
-
+		
 		return null;
 	}
 

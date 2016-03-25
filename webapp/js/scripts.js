@@ -8,16 +8,17 @@ String.prototype.format = function() {
   });
 };
 
-$(".form-delete button[type=submit]").on('click',deleteAnswer);
+ 
 
+//$(".form-delete button[type=submit]").click(deleteAnswer);
+$(".qna-comment-slipp").on("click",".link-delete-article",deleteAnswer);
 
 function deleteAnswer(e) {
 	e.preventDefault();
-	console.log("delete button");
-	var btnDelete = $(this);
-	var dataString = btnDelete.parent().closest("form").serialize();
 	
-	console.log(dataString);
+	var btnDelete = $(this);
+	var dataString = btnDelete.parent().closest(".form-delete").serialize();
+	
 	$.ajax({
 		type:'post',
 		url: '/api/qna/deleteAnswer',
@@ -28,8 +29,12 @@ function deleteAnswer(e) {
 	    },
 	    success: function (json, status) {
 	    	if (json.status) {
+	    		
 	    		btnDelete.closest('article').remove();
-	    		$(".qna-comment-count strong").text($(".qna-comment").find(".article").length);
+	    		// 새롭게 만들어진 리스트 갯수 세서 숫자 갱신
+	    		// 데이터에서 받아와야 하는거 아닌가?
+	    		var updatedNumOfComments = $(".qna-comment-slipp-articles").find(".article").length;
+	    		$(".qna-comment-count strong").text(updatedNumOfComments);
 	    	}
 	    }
 	});
@@ -54,8 +59,9 @@ function addAnswer(e) {
 			var answerTemplate = $("#answerTemplate").html();
 			var template = answerTemplate.format(json.writer, new Date(json.createdDate), json.contents, json.answerId, json.answerId);
 			$(".qna-comment-slipp-articles").prepend(template);
-			// x개의 의견 
-			$(".qna-comment-count strong").text($(".qna-comment").find(".article").length);
+			
+			var updatedNumOfComments = $(".qna-comment-slipp-articles").find(".article").length;
+    		$(".qna-comment-count strong").text(updatedNumOfComments);
 		}
 	});
 }
