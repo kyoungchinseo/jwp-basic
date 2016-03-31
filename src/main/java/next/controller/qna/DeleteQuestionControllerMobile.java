@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +24,9 @@ public class DeleteQuestionControllerMobile extends AbstractController{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		long questionId = Long.parseLong(request.getParameter("questionId"));
 		// 답변이 없으면 지운다. 
-		QuestionDao questionDao = new QuestionDao();
-		AnswerDao answerDao = new AnswerDao();
+		ServletContext sc = request.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
+		AnswerDao answerDao = (AnswerDao)sc.getAttribute("answerDao");
 		Question question = questionDao.findById(questionId);
 		int countOfComment = question.getCountOfComment();
 		if (countOfComment == 0) {

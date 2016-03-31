@@ -1,5 +1,6 @@
 package next.controller.qna;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +17,13 @@ import next.model.Question;
 public class AddAnswerController extends AbstractController {
 	private static final Logger log = LoggerFactory.getLogger(AddAnswerController.class);
 
-	private AnswerDao answerDao = new AnswerDao();
-
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		long questionId = Long.parseLong(req.getParameter("questionId"));
+		
+		ServletContext sc = req.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
+		AnswerDao answerDao = (AnswerDao)sc.getAttribute("answerDao");
 		
 		Answer answer = new Answer(req.getParameter("writer"), 
 				req.getParameter("contents"), 
@@ -29,7 +32,6 @@ public class AddAnswerController extends AbstractController {
 		
 		Answer savedAnswer = answerDao.insert(answer);
 		
-		QuestionDao questionDao = new QuestionDao();
 		questionDao.increaseCountOfAnswer(questionId);
 		
 		log.debug("questionDao: {}",questionDao.findById(questionId).getCountOfComment());

@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +18,9 @@ public class ShowController extends AbstractController {
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		Long questionId = Long.parseLong(req.getParameter("questionId"));
 		
-		QuestionDao questionDao = new QuestionDao();
-		AnswerDao answerDao = new AnswerDao();
+		ServletContext sc = req.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
+		AnswerDao answerDao = (AnswerDao)sc.getAttribute("answerDao");
 		
 		Question question = questionDao.findById(questionId);
 		List<Answer> answers = answerDao.findAllByQuestionId(questionId);

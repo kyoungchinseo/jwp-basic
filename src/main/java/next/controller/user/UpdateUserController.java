@@ -1,5 +1,6 @@
 package next.controller.user;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +15,12 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 
 public class UpdateUserController extends AbstractController {
-	private UserDao userDao = new UserDao();
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
     
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
+		ServletContext sc = req.getServletContext();
+		UserDao userDao = (UserDao)sc.getAttribute("userDao");
 		User user = userDao.findByUserId(req.getParameter("userId"));
 		
         if (!UserSessionUtils.isSameUser(req.getSession(), user)) {

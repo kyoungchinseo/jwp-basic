@@ -1,5 +1,6 @@
 package next.controller.qna;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,14 +19,16 @@ public class DeleteAnswerController extends AbstractController {
     
 	private static final Logger log = LoggerFactory.getLogger(DeleteAnswerController.class);
 	
-	private AnswerDao answerDao= new AnswerDao();
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long answerId = Long.parseLong(request.getParameter("answerId"));
 		
+		ServletContext sc = request.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
+		AnswerDao answerDao = (AnswerDao)sc.getAttribute("answerDao");
+		
 		ModelAndView mav = jsonView();
 		try {
-			QuestionDao questionDao = new QuestionDao();
 			questionDao.decreaseCountOfAnswer(answerDao.findById(answerId).getQuestionId());
 			
 			answerDao.delete(answerId);

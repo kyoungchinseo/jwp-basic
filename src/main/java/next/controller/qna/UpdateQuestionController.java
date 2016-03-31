@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,7 +33,10 @@ public class UpdateQuestionController extends AbstractController {
 		log.debug(request.getParameter("title"));
 		log.debug(request.getParameter("contents"));
 		log.debug(request.getParameter("writer"));
-		QuestionDao questionDao = new QuestionDao();
+		
+		ServletContext sc = request.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
+		AnswerDao answerDao = (AnswerDao)sc.getAttribute("answerDao");
 
 		Question question = new Question(request.getParameter("writer"),
 				request.getParameter("title"),
@@ -40,7 +44,6 @@ public class UpdateQuestionController extends AbstractController {
 		
 		questionDao.update(questionId, question);
 		
-		AnswerDao answerDao = new AnswerDao();
 		
 		Question updatedQuestion = questionDao.findById(questionId);
 		List<Answer> answers = answerDao.findAllByQuestionId(questionId);

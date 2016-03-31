@@ -1,5 +1,6 @@
 package next.controller.user;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,10 +16,13 @@ import core.mvc.ModelAndView;
 public class CreateUserController extends AbstractController {
     private static final Logger log = LoggerFactory.getLogger(CreateUserController.class);
 
-    private UserDao userDao = new UserDao();
     
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ServletContext sc = request.getServletContext();
+		UserDao userDao = (UserDao)sc.getAttribute("userDao");
+		
 		User user = new User(
 				request.getParameter("userId"), 
 				request.getParameter("password"), 

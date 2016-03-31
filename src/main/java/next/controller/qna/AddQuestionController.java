@@ -1,5 +1,6 @@
 package next.controller.qna;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
+import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Question;
 import next.model.User;
@@ -32,7 +34,8 @@ public class AddQuestionController extends AbstractController {
 				request.getParameter("title"),request.getParameter("contents"));
 		log.debug("Question:{} ", question);
 		
-		QuestionDao questionDao = new QuestionDao();
+		ServletContext sc = request.getServletContext();
+		QuestionDao questionDao = (QuestionDao)sc.getAttribute("questionDao");
 		questionDao.insert(question);
 		
 		return jspView("../index.jsp").addObject("questions", questionDao.findAll());
