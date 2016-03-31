@@ -58,10 +58,26 @@ public class QuestionDao {
 				question.getCountOfComment());
 		
 	}
+	
+	public void update(Long questionId, Question question) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "UPDATE QUESTIONS SET title = ?, contents = ? where questionId = ?";
+		jdbcTemplate.update(sql,
+				question.getTitle(),
+				question.getContents(),
+				questionId);
+	}
 
 	public void increaseCountOfAnswer(long questionId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "UPDATE QUESTIONS SET countOfAnswer = countOfAnswer + 1 WHERE questionId = ?";
 		jdbcTemplate.update(sql, questionId);		
+	}
+
+	public void decreaseCountOfAnswer(long questionId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "UPDATE QUESTIONS SET countOfAnswer = countOfAnswer - 1 WHERE questionId = ?";
+		jdbcTemplate.update(sql, questionId);		
+		
 	}
 }

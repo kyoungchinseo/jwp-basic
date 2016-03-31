@@ -20,18 +20,24 @@ public class AddAnswerController extends AbstractController {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
+		long questionId = Long.parseLong(req.getParameter("questionId"));
+		
 		Answer answer = new Answer(req.getParameter("writer"), 
 				req.getParameter("contents"), 
-				Long.parseLong(req.getParameter("questionId")));
+				questionId);
 		log.debug("answer : {}", answer);
 		
 		Answer savedAnswer = answerDao.insert(answer);
 		
 		QuestionDao questionDao = new QuestionDao();
-		questionDao.increaseCountOfAnswer(Long.parseLong(req.getParameter("questionId")));
+		questionDao.increaseCountOfAnswer(questionId);
 		
+		log.debug("questionDao: {}",questionDao.findById(questionId).getCountOfComment());
 		
-		
-		return jsonView().addObject("answer", savedAnswer).addObject("question", (Question)questionDao.findById(Long.parseLong(req.getParameter("questionId"))));
+		ModelAndView mav = jsonView();
+		mav.addObject("answer", savedAnswer);
+		mav.addObject("question", questionDao.findById(questionId));
+		mav.addObject("countOfComment", questionDao.findById(questionId).getCountOfComment());
+		return mav;
 	}
 }
