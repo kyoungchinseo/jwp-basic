@@ -9,22 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import core.mvc.AbstractController;
-import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Answer;
 import next.model.Question;
 
-public class DeleteQuestionController extends AbstractController{
+public class DeleteQuestionControllerMobile extends AbstractController{
 
-	private static final Logger log = LoggerFactory.getLogger(DeleteQuestionController.class);
+	private static final Logger log = LoggerFactory.getLogger(DeleteQuestionControllerMobile.class);
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		log.debug("enter delete request");
-		log.debug("questionId: {}",request.getParameter("questionId"));
-		
 		long questionId = Long.parseLong(request.getParameter("questionId"));
 		// 답변이 없으면 지운다. 
 		QuestionDao questionDao = new QuestionDao();
@@ -34,7 +30,7 @@ public class DeleteQuestionController extends AbstractController{
 		if (countOfComment == 0) {
 			log.debug("DELETE: no comment");
 			questionDao.delete(questionId);
-			return jspView("redirect:/");
+			return jsonView().addObject("Questions",questionDao.findAll());
 		} 
 		// 질문자와 답변자가 같은 경우 삭제할 수 있다.
 		List<Answer> answers = answerDao.findAllByQuestionId(questionId);
@@ -49,7 +45,8 @@ public class DeleteQuestionController extends AbstractController{
 			answerDao.deleteByQuestionId(questionId);
 		}
 		// 질문자와 답변자가 다른 경우 삭제 할 수 없다.
-		return jspView("redirect:/");
+		return jsonView().addObject("Questions",questionDao.findAll());
+		
 		
 	}
 
